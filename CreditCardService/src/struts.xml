@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+	<!-- 常量设置，将开发模式打开，配置文件发生变化，自动加载 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.ui.templateDir" value="WEB-INF/template" />
+	
+	<include file="struts-userManager.xml"></include>
+	<include file="struts-cardManagement.xml"></include>
+	<include file="struts-main.xml"></include>
+
+</struts>

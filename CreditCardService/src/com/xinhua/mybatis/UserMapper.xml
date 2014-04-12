@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xinhua.mybatis.UserMapper">
+
+	<insert id="addUserInfo" parameterType="com.xinhua.pojo.UserInfo">
+    	insert into userinfo (idNumber,firstName,lastName,birthday,address,salary,tel,mail) values(#{idNumber},#{firstName},#{lastName},#{birthday},#{address},#{salary},#{tel},#{mail})
+	</insert>
+	
+	<select id="getUserInfoById" resultType="com.xinhua.pojo.UserInfo" parameterType="java.lang.String">
+        select * from userinfo where idNumber =#{idNumber}
+    </select>
+	
+	<insert id="generateAccountNumber" parameterType="com.xinhua.pojo.AccountInfo">
+    	insert into accountInfo (accountNumber,customerNumber) values(#{accountNumber},#{customerNumber})
+	</insert>
+	
+	<select id="getAccountNumberForUser" parameterType="com.xinhua.pojo.UserInfo" resultType="java.lang.String">
+    	select accountNumber from accountInfo where customerNumber =#{customerNumber}
+	</select>
+	
+	
+	
+
+    <insert id="addCardInfo" parameterType="com.xinhua.pojo.CardInfo">
+        insert into cardinfo values(#{cardNumber},#{accountNumber},#{productType},#{cardLogo},#{availableAmount},#{currentAmount},#{creditLimit},#{cardIndicator},#{cardEmbossName},#{cardExpireDate},#{cardBlockCode},#{cardActiveCode})
+    </insert>
+    
+    <insert id="addUser" parameterType="com.xinhua.pojo.User">
+    	insert into userpass (userName,password,failloginCount,status,customerNumber) values(#{userName},#{password},#{failloginCount},#{status},#{customerNumber})
+	</insert>
+	
+	<select id="getCardInfoByUserName" resultType="com.xinhua.pojo.CardInfo" parameterType="java.lang.String">
+        select * from cardinfo where userName =#{userName}
+    </select>
+</mapper>

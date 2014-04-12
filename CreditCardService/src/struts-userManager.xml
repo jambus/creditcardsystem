@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+	<!-- struts2中的action是通过包来控制的 ,包是可以互相继承的-->
+	<package name="userManager" extends="struts-default">
+		<result-types>  
+  			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>  
+		</result-types> 
+		
+		<global-results>  
+	    	<result name="error" type="tiles">creditcard.error</result>  
+	  	</global-results>
+		
+		<action name="login" class="com.xinhua.action.LoginAction">
+			<result name="home" type="redirect">home.action</result>
+			<result name="login" type="tiles">creditcard.login</result>
+			<result name="input" type="tiles">creditcard.login</result>
+		</action>
+		<action name="toRegister" class="com.xinhua.action.ToRegisterAction">
+			<result name="register" type="tiles">creditcard.register</result>
+		</action>
+		<action name="register" class="com.xinhua.action.RegisterAction">
+			<result name="regsuccess" type="tiles">creditcard.registerSuccess</result>
+			<result name="input" type="tiles">creditcard.register</result>
+		</action>
+		<action name="toLogin" class="com.xinhua.action.ToLoginAction">
+			<result name="login" type="tiles">creditcard.login</result>
+			<result name="home" type="redirect">home.action</result>
+		</action>
+		
+		<action name="logoff" class="com.xinhua.action.LogOffAction">
+			<result name="logoff" type="tiles">creditcard.logoff</result>
+		</action>
+		<!-- <action name="active" class="com.xinhua.action.ActiveAction">
+			<result name="regsuccess">regsuccess.jsp</result>
+		</action> -->
+		
+		<!--
+		<action name="toCost" class="com.xinhua.action.ToCostAction">
+			<result name="cost">cost.jsp</result>
+		</action>
+		<action name="cost" class="com.xinhua.action.CostAction">
+			<result name="costsuccess">costsuccess.jsp</result>
+			<result name="input">cost.jsp</result>
+		</action>
+		  -->
+	</package>
+	
+</struts>

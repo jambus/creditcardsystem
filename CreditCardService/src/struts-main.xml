@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+    
+<struts>
+	<!-- struts2中的action是通过包来控制的 ,包是可以互相继承的-->
+	<package name="main" extends="struts-default">
+		<result-types>  
+	  		<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>  
+		</result-types>  
+	
+		<global-results>  
+	    	<result name="error" type="tiles">creditcard.error</result>  
+	  	</global-results>
+	  	
+		<action name="home" class="com.xinhua.action.NavigateAction">
+			<result name="success" type="tiles">creditcard.myhome</result>
+		</action>
+	</package>
+	
+</struts>

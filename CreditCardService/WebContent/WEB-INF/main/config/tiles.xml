@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+       
+<tiles-definitions>
+    <definition name="defaultLayout" template="/WEB-INF/main/jsp/layout/layout.jsp">
+       <put-attribute name="title" value="Credit card system" />
+       <put-attribute name="header" value="/WEB-INF/main/jsp/layout/header.jsp" />
+       <put-attribute name="menu" value="/WEB-INF/main/jsp/layout/menu.jsp" />
+       <put-attribute name="body" value="/WEB-INF/main/jsp/layout/body.jsp" />
+       <put-attribute name="footer" value="/WEB-INF/main/jsp/layout/footer.jsp" />
+    </definition>
+    
+    <definition name="prelogin_defaultLayout" template="/WEB-INF/main/jsp/layout/preloginlayout.jsp">
+       <put-attribute name="title" value="Credit card system" />
+       <put-attribute name="header" value="/WEB-INF/main/jsp/layout/header.jsp" />
+       <put-attribute name="body" value="/WEB-INF/main/jsp/layout/body.jsp" />
+       <put-attribute name="footer" value="/WEB-INF/main/jsp/layout/footer.jsp" />
+    </definition>
+    
+    <definition name="creditcard.myhome" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/main/jsp/myhome.jsp" />
+    </definition>
+    
+    <definition name="creditcard.login" extends="prelogin_defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/userManager/jsp/login.jsp" />
+    </definition>
+    
+    <definition name="creditcard.register" extends="prelogin_defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/userManager/jsp/register.jsp" />
+    </definition>
+    
+    <definition name="creditcard.registerSuccess" extends="prelogin_defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/userManager/jsp/regsuccess.jsp" />
+    </definition>
+    
+    <definition name="creditcard.logoff" extends="prelogin_defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/userManager/jsp/logoff.jsp" />
+    </definition>
+    
+    <definition name="creditcard.apply" extends="prelogin_defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/applyCard/jsp/apply.jsp" />
+    </definition>
+    
+    <definition name="creditcard.applyDone" extends="prelogin_defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/applyCard/jsp/applyDone.jsp" />
+    </definition>
+    
+    <definition name="creditcard.error" extends="prelogin_defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/main/jsp/genericError.jsp" />
+    </definition>
+</tiles-definitions>
