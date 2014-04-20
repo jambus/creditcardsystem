@@ -9,6 +9,7 @@ public interface CardInfoDao {
 
 	int addCardInfo(CardInfo cardInfo);
 	List<CardInfo> getCardListByAccountNumber(String accountNumber);
+	String getAccountNumberByCustomerID(long customerID);
 	
 	int activeCard(CardInfo cardInfo);
 	CardInfo getCardInfoByUserName(String userName);

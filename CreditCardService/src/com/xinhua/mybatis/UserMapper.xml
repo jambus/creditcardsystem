@@ -32,6 +32,9 @@
         select * from userpass where userName =#{userName}
     </select>
     
+    <select id="getAccountNumberByCustomerID" resultType="java.lang.String" parameterType="java.lang.Long">
+        select accountNumber from accountInfo where customerNumber =#{customerNumber}
+    </select>
     
     
     

@@ -115,4 +115,19 @@ public class CardInfoDaoImpl implements CardInfoDao {
 		return cardList;
 	}
 
+	@Override
+	public String getAccountNumberByCustomerID(long customerID) {
+		String accountNumber = null;
+		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        	accountNumber =  userMapper.getAccountNumberByCustomerID(customerID);
+            sqlSession.commit();
+        } 
+        finally {
+            sqlSession.close();
+        }
+		return accountNumber;
+	}
+
 }

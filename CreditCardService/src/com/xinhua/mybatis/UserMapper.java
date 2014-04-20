@@ -17,6 +17,8 @@ public interface UserMapper {
 	
 	public int generateAccountNumber(AccountInfo accountInfo);
 	
+	public String getAccountNumberByCustomerID(long customerID);
+	
 	public int addUserInfo(UserInfo userInfo);
 	public UserInfo getUserInfoById(String idNumber);
 	

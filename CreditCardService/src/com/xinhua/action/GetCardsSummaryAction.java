@@ -1,6 +1,7 @@
 package com.xinhua.action;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,10 +46,11 @@ public class GetCardsSummaryAction extends ActionSupport{
 				long customerNumber = ProfileUtil.getProfile().getCustomerNumber();
 				log.debug("CustomerNumber:"+ customerNumber);
 				
-				//TODO getAccount number
+				String accountNumber = cardInfoDao.getAccountNumberByCustomerID(customerNumber);
 				
-				cardList = cardInfoDao.getCardListByAccountNumber(String.valueOf(customerNumber));
+				cardList = cardInfoDao.getCardListByAccountNumber(String.valueOf(accountNumber));
 				
+				List<Map<String,String>> cardDetailsList = new ArrayList<Map<String,String>>();
 				for(CardInfo card : cardList){
 					Map<String,String> cardMap = new HashMap<String,String>();
 					int productType = Integer.valueOf(card.getProductType());
@@ -74,9 +76,9 @@ public class GetCardsSummaryAction extends ActionSupport{
 					cardMap.put("cardNumber", card.getCardNumber());
 					cardMap.put("currentAmount", card.getCurrentAmount().toPlainString());
 					
-					dataMap.put(card.getCardNumber(), cardMap);
-					
+					cardDetailsList.add(cardMap);
 				}
+				dataMap.put("cardList", cardDetailsList);
 				dataMap.put("status", "ok");
 		    }
 		}catch (Exception e){
