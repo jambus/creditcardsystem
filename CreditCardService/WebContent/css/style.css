@@ -96,6 +96,38 @@
 	float:right;
 }
 
-#menuBody{
+.top {
+	width: 800px;
+	height: 100px;
+	background-color: #AB8534;
+	background-image: url(images/top.jpg);
+	background-repeat: repeat-x;
+	line-height: 100px;
+	border: 1px solid #FF0;
+}
+
+.f1 {
+	font-size: 48px;
+	font-weight: bold;
+	color: #FFF;
+	margin-left: 20px;
+}
+
+.post-layoutHeader{
+	
+}
+
+.post-layoutMenu{
+	
+}
+
+.post-layoutBody{
+	vertical-align: top;
+	align:left;
+	width:800;
+	height:auto;
+}
+
+.post-layoutFooter{
 	
 }

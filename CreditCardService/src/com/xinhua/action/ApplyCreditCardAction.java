@@ -26,10 +26,10 @@ public class ApplyCreditCardAction extends ActionSupport{
 	private String customType;
 	private String customerAccountNumber;
 	
-	UserDao userImpl = new UserDaoImpl();
-	UserInfoDao userInfoImpl = new UserInfoDaoImpl();
+	UserDao userDao = new UserDaoImpl();
+	UserInfoDao userInfoDao = new UserInfoDaoImpl();
 	CardInfo cardInfo = new CardInfo();
-	CardInfoDao cardInfoImpl = new CardInfoDaoImpl();
+	CardInfoDao cardInfoDao = new CardInfoDaoImpl();
 
 	public UserInfo getUserInfo() {
 		return userInfo;
@@ -66,17 +66,20 @@ public class ApplyCreditCardAction extends ActionSupport{
 	public String execute(){
 		
 		if(Const.CUSTOMERTYPE_EXISTING.equals(getCustomType())){
-			userInfo = userInfoImpl.getUserInfoById(userInfo.getIdNumber());
+			userInfo = userInfoDao.getUserInfoById(userInfo.getIdNumber());
 		}
 		
 		if(Const.CUSTOMERTYPE_NEW.equals(getCustomType())){
-			int lines = userInfoImpl.addNewUserInfoWithAccountNumber(userInfo);
+			int lines = userInfoDao.addNewUserInfoWithAccountNumber(userInfo);
 			if(lines<0){
 				return "error";
 			}
 		}
-		userInfo = userInfoImpl.getUserInfoById(userInfo.getIdNumber());
-		setCustomerAccountNumber(userInfoImpl.getAccountNumberForUser(userInfo));
+		userInfo = userInfoDao.getUserInfoById(userInfo.getIdNumber());
+		setCustomerAccountNumber(userInfoDao.getAccountNumberForUser(userInfo));
+		
+		cardInfo = GetCardInfo.initCreditCardInfo(userInfo,getCustomerAccountNumber());
+		cardInfoDao.addCardInfo(cardInfo);
 		
 		return "applyDone";
 	}
@@ -85,9 +88,9 @@ public class ApplyCreditCardAction extends ActionSupport{
 	public void validate() {
 		if(getCustomType() == null || "".equals(getCustomType().trim())){
 			this.addFieldError("customType", "请选择用户类型！");
-		}else if(Const.CUSTOMERTYPE_NEW.equals(getCustomType()) && userInfoImpl.getUserInfoById(userInfo.getIdNumber())!=null){
+		}else if(Const.CUSTOMERTYPE_NEW.equals(getCustomType()) && userInfoDao.getUserInfoById(userInfo.getIdNumber())!=null){
 			this.addFieldError("customType", "请选择现有用户类型！");
-		}else if(Const.CUSTOMERTYPE_EXISTING.equals(getCustomType()) && userInfoImpl.getUserInfoById(userInfo.getIdNumber())==null){
+		}else if(Const.CUSTOMERTYPE_EXISTING.equals(getCustomType()) && userInfoDao.getUserInfoById(userInfo.getIdNumber())==null){
 			this.addFieldError("customType", "请选择新用户类型！");
 		}else if(!getCustomType().equals(Const.CUSTOMERTYPE_EXISTING) && !getCustomType().equals(Const.CUSTOMERTYPE_NEW)){
 			this.addFieldError("customType", "未知用户类型！");

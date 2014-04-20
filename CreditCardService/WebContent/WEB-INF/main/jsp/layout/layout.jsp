@@ -26,22 +26,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <table width="800px" height="400px" border="0" align="center">
       
            <tr>
-              <td align="center" valign="top" width="800px" height="50px">
+              <td class="post-layoutHeader" align="center" valign="top" width="800px" height="50px">
                   <tiles:insertAttribute name="header"/>
               </td>
            </tr>
            <tr>
-              <td align="left" width="800px" height="60px">
+              <td class="post-layoutMenu" align="left" width="800px" height="60px">
                   <tiles:insertAttribute name="menu" />
               </td>
            </tr>
            <tr>
-              <td align="center" width="800px" height="250px"">
+              <td class="post-layoutBody">
                   <tiles:insertAttribute name="body" />
               </td>
            </tr>
            <tr>
-              <td height="40px">
+              <td class="post-layoutFooter" height="40px">
                   <tiles:insertAttribute name="footer" />
               </td>
            </tr>

@@ -34,19 +34,6 @@
 		<action name="logoff" class="com.xinhua.action.LogOffAction">
 			<result name="logoff" type="tiles">creditcard.logoff</result>
 		</action>
-		<!-- <action name="active" class="com.xinhua.action.ActiveAction">
-			<result name="regsuccess">regsuccess.jsp</result>
-		</action> -->
-		
-		<!--
-		<action name="toCost" class="com.xinhua.action.ToCostAction">
-			<result name="cost">cost.jsp</result>
-		</action>
-		<action name="cost" class="com.xinhua.action.CostAction">
-			<result name="costsuccess">costsuccess.jsp</result>
-			<result name="input">cost.jsp</result>
-		</action>
-		  -->
 	</package>
 	
 </struts>

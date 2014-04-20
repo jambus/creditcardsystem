@@ -14,13 +14,13 @@ import com.xinhua.dao.impl.UserDaoImpl;
 import com.xinhua.pojo.SysProfile;
 import com.xinhua.pojo.User;
 import com.xinhua.util.EncryptUtil;
-import com.xinhua.util.ProfileValidateUtil;
+import com.xinhua.util.ProfileUtil;
 
 public class LoginAction extends ActionSupport{
 	
 	private static Log log = LogFactory.getLog(LoginAction.class);
 	private User user;
-	private UserDao userImpl = new UserDaoImpl();
+	private UserDao userDao = new UserDaoImpl();
 	
 
 	public User getUser() {
@@ -38,22 +38,24 @@ public class LoginAction extends ActionSupport{
 		
 		log.info("Start Login");
 		try{
-			if(ProfileValidateUtil.isCustomerLogin()){
+			if(ProfileUtil.isCustomerLogin()){
 		    	forward = "home";
 		    	return forward;
 		    }
 			
 			String inputUserName = user.getUserName();
 			String inputPassword = EncryptUtil.getEncryptedBySha1(user.getPassword());
-			if(userImpl.getUserByName(inputUserName) == null){
+			if(userDao.getUserByName(inputUserName) == null){
 				this.addFieldError("user.userName", "用户名不存在，请重新输入！");
 				forward = "login";
 			}else{
-				User user = userImpl.getUserByName(inputUserName);
+				User user = userDao.getUserByName(inputUserName);
 				
 				if(Const.USERSTATUS_ACTIVE.equals(user.getStatus()) && inputPassword.equals(user.getPassword())){
 					forward = "home";
-					ProfileValidateUtil.getProfile().setCustomerType(Const.CUSTOMERTYPE_CUSTOMER);
+					ProfileUtil.getProfile().setCustomerType(Const.CUSTOMERTYPE_CUSTOMER);
+					ProfileUtil.getProfile().setUserName(user.getUserName());
+					ProfileUtil.getProfile().setCustomerNumber(user.getCustomerNumber());
 				}else if(Const.USERSTATUS_LOCK.equals(user.getStatus())){
 					this.addFieldError("user.userName", "用户名或密码不正确！请联系银行工作人员获取更多的支持。");
 					forward = "login";
@@ -65,7 +67,7 @@ public class LoginAction extends ActionSupport{
 					if(user.getFailloginCount()>=3){
 						user.setStatus(Const.USERSTATUS_LOCK);
 					}
-					userImpl.modifyUser(user);
+					userDao.modifyUser(user);
 				}	
 			}
 		}catch(Exception e){

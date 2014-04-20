@@ -6,12 +6,12 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.xinhua.constant.Const;
 import com.xinhua.pojo.SysProfile;
-import com.xinhua.util.ProfileValidateUtil;
+import com.xinhua.util.ProfileUtil;
 
 public class ToLoginAction extends ActionSupport {
 
 	public String execute(){
-		if(ProfileValidateUtil.isCustomerLogin()){
+		if(ProfileUtil.isCustomerLogin()){
 			return "home";
 		}
 		return "login";

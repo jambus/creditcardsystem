@@ -1,5 +1,7 @@
 package com.xinhua.mybatis;
 
+import java.util.List;
+
 import com.xinhua.pojo.AccountInfo;
 import com.xinhua.pojo.CardInfo;
 import com.xinhua.pojo.User;
@@ -11,6 +13,7 @@ public interface UserMapper {
 	public CardInfo getCardInfoByUserName(String userName);
 	
 	public int addUser(User user);
+	public User getUserByName(String userName);
 	
 	public int generateAccountNumber(AccountInfo accountInfo);
 	
@@ -18,4 +21,6 @@ public interface UserMapper {
 	public UserInfo getUserInfoById(String idNumber);
 	
 	public String getAccountNumberForUser(UserInfo userInfo);
+	
+	public List<CardInfo> getCardListByAccountNumber(String accountNumber);
 }

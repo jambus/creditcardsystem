@@ -6,7 +6,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.xinhua.constant.Const;
 import com.xinhua.pojo.SysProfile;
 
-public class ProfileValidateUtil {
+public class ProfileUtil {
 	private static SysProfile profile;
 	
 	static{

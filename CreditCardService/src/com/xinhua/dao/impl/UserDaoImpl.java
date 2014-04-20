@@ -67,30 +67,18 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public User getUserByName(String userName) {
-		String sql = "select * from userpass where userName = '" + userName + "'";
-		log.info("getUserByName"+sql);
-		
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		conn = DBHelper.getConnection();
 
 		User user = null;
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-
-			if (rs.next()) {
-				user = new User();
-				user.setUserName(rs.getString("userName"));
-				user.setPassword(rs.getString("password"));
-				user.setStatus(rs.getString("status"));
-				user.setFailloginCount(rs.getInt("failloginCount"));
-			}
-		} catch (SQLException e) {
-			log.error("Error during SQL:"+ e.getMessage());
-		}
-		DBHelper.free(conn, stmt);
+		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+            user = userMapper.getUserByName(userName);
+            sqlSession.commit();
+        } catch(Exception e){
+        	log.error("getUserByName:"+e.getMessage());
+        } finally {
+            sqlSession.close();
+        }
 		return user;
 	}
 

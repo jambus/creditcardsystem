@@ -13,7 +13,7 @@ drop table IF EXISTS accountInfo;
 drop table IF EXISTS userinfo;
 
 create table userinfo(
-	customerNumber MEDIUMINT not null AUTO_INCREMENT primary key,
+	customerNumber INTEGER UNSIGNED not null AUTO_INCREMENT primary key,
 	idNumber varchar(20) unique,
 	firstName varchar(20),
 	lastName varchar(20),
@@ -26,13 +26,13 @@ create table userinfo(
 
 create table accountInfo(
 	accountNumber varchar(10) primary key,
-	customerNumber MEDIUMINT,
+	customerNumber INTEGER UNSIGNED,
 	foreign key (customerNumber) references userinfo(customerNumber)
 );
 
 create table userpass( 
 	userName varchar(20) primary key,
-	customerNumber MEDIUMINT,
+	customerNumber INTEGER UNSIGNED,
 	password varchar(255) not null,
 	failloginCount int,
 	status varchar(1),

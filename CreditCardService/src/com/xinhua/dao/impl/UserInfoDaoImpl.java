@@ -36,7 +36,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
             
             UserInfo newuserInfo = userMapper.getUserInfoById(userInfo.getIdNumber());
             AccountInfo accountInfo = new AccountInfo();
-            accountInfo.setAccountNumber(GetCardInfo.getAccountNumber());
+            accountInfo.setAccountNumber(GetCardInfo.generateAccountNumber());
             accountInfo.setCustomerNumber(newuserInfo.getCustomerNumber());
             userMapper.generateAccountNumber(accountInfo);
             sqlSession.commit();

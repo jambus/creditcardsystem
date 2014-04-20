@@ -20,12 +20,20 @@
     	select accountNumber from accountInfo where customerNumber =#{customerNumber}
 	</select>
 	
-	
-	
-
     <insert id="addCardInfo" parameterType="com.xinhua.pojo.CardInfo">
         insert into cardinfo values(#{cardNumber},#{accountNumber},#{productType},#{cardLogo},#{availableAmount},#{currentAmount},#{creditLimit},#{cardIndicator},#{cardEmbossName},#{cardExpireDate},#{cardBlockCode},#{cardActiveCode})
     </insert>
+    
+    <select id="getCardListByAccountNumber" resultType="com.xinhua.pojo.CardInfo" parameterType="java.lang.String">
+        select * from cardinfo where accountNumber =#{accountNumber}
+    </select>
+
+    <select id="getUserByName" resultType="com.xinhua.pojo.User" parameterType="java.lang.String">
+        select * from userpass where userName =#{userName}
+    </select>
+    
+    
+    
     
     <insert id="addUser" parameterType="com.xinhua.pojo.User">
     	insert into userpass (userName,password,failloginCount,status,customerNumber) values(#{userName},#{password},#{failloginCount},#{status},#{customerNumber})

@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -16,7 +19,8 @@ import com.xinhua.util.DBHelper;
 import com.xinhua.mybatis.UserMapper;
 
 public class CardInfoDaoImpl implements CardInfoDao {
-
+	private static Log log = LogFactory.getLog(CardInfoDaoImpl.class);
+	
 	@Override
 	public int addCardInfo(CardInfo cardInfo) {
 		int lines = 0;
@@ -25,7 +29,11 @@ public class CardInfoDaoImpl implements CardInfoDao {
         	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
             userMapper.addCardInfo(cardInfo);
             sqlSession.commit();
-        } finally {
+        } catch(Exception e){
+        	log.error("addCardInfo:"+e.getMessage());
+        	sqlSession.rollback();
+        }
+        finally {
             sqlSession.close();
         }
         return lines;
@@ -88,6 +96,23 @@ public class CardInfoDaoImpl implements CardInfoDao {
         }
 		
 		return cardInfo;
+	}
+
+	@Override
+	public List<CardInfo> getCardListByAccountNumber(String accountNumber) {
+
+
+		List<CardInfo> cardList = null;
+		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        	cardList =  userMapper.getCardListByAccountNumber(accountNumber);
+            sqlSession.commit();
+        } 
+        finally {
+            sqlSession.close();
+        }
+		return cardList;
 	}
 
 }

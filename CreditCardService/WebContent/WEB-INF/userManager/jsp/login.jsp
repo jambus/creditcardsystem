@@ -22,7 +22,13 @@
         </form>
         <form id="myForm" method="post" action="toRegister">
         	<div style="position:absolute; top:320px; left:600px;">
-            	<input type="submit" id="register" value="REGISTER NOW..."/>
+            	<input type="submit" id="register" value=">REGISTER NOW<"/>
+            </div>
+        </form>
+        
+        <form id="myForm" method="post" action="toApply">
+        	<div style="position:absolute; top:320px; left:350px;">
+            	<input type="submit" id="register" value=">Apply new card<"/>
             </div>
         </form>
     </div>
