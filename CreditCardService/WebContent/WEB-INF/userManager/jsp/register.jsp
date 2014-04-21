@@ -4,9 +4,9 @@
 	<script type="text/javascript" src="js/date.js"></script>
 	<script type="text/javascript" src="js/register.js"></script>
 
-	<h2>用户注册</h2>
+	<h2 class="titleh2">注册用户 >>></h2>
     <form action="register.action" method="post" name="myForm" onsubmit="return checkform()">
-    	<table>
+    	<table id="applyTable">
     		<tr>
     			<td>用户名：</td>
     			<td><input name="user.userName" id="userName"/>
@@ -56,11 +56,12 @@
     			<span id="nulltel" style="display:none;" class="errorMsg">电话不能为空</span></td>
     		</tr>
     		<tr>
-    			<td colspan="2"><input type="checkbox" id="agree"/>我同意...
-    			<span id="nullagree" style="display:none;" class="errorMsg">请同意协议</span></td>
+    			<td><input type="checkbox" id="agree"/></td>
+				<td>我同意以下协议</td>
+    			<span id="nullagree" style="display:none;" class="errorMsg">请同意协议</span>
     		</tr>
-    		<tr>
-    			<td colspan="2"><input type="submit" value="register" /></td>
+    		<tr class="submitTr">
+    			<td colspan="2"><input type="submit" value="注     册" /></td>
     		</tr>
     	</table>
     	

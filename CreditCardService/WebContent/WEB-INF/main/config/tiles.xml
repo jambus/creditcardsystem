@@ -24,7 +24,9 @@
     </definition>
     
     <definition name="creditcard.login" extends="prelogin_defaultLayout">
+    	<put-attribute name="header" value="" />
     	<put-attribute name="body" value="/WEB-INF/userManager/jsp/login.jsp" />
+    	<put-attribute name="footer" value="" />
     </definition>
     
     <definition name="creditcard.register" extends="prelogin_defaultLayout">

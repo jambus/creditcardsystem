@@ -1,6 +1,6 @@
-<div style="margin:20px 200px;">
+<div style="margin-left:-150px;">
         <div class="logoffmain">
-            Thank you to use <b>Credit Card Online System!</b>
-            <a href="/CreditCardService/" style="color:#AB8534; top:100px; left:120px;">Back to login page &gt;&gt;&gt;</a>
+            Thank you to use <b>Credit Card Online System!</b><br /><br />
+            <a href="/CreditCardService/" style="color:#AB8534;">Back to login page >>></a>
         </div>
 </div>

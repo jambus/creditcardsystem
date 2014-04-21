@@ -4,7 +4,7 @@
 	<script type="text/javascript" src="js/date.js"></script>
 	<script type="text/javascript" src="js/apply.js"></script>
 	
-	<h2>申请信用卡</h2>
+	<h2 class="titleh2">申请信用卡 >>></h2> 
 
     <form action="apply.action" method="post" name="myForm" onsubmit="return checkform()">
     	<table id="applyTable">
@@ -61,11 +61,12 @@
     			<span id="nullmail" style="display:none;" class="errorMsg">邮箱不能为空</span></td>
     		</tr>
     		<tr>
-    			<td colspan="2"><input type="checkbox" id="agree"/>我同意...
-    			<span id="nullagree" style="display:none;" class="errorMsg">请同意协议</span></td>
+    			<td><input type="checkbox" id="agree"/></td>
+				<td>我同意以下协议</td>
+    			<span id="nullagree" style="display:none;" class="errorMsg">请同意协议</span>
     		</tr>
-    		<tr id="submitTr">
-    			<td colspan="2"><input type="submit" value="申请" /></td>
+    		<tr class="submitTr">
+    			<td colspan="2"><input type="submit" value="申     请" /></td>
     		</tr>
     	</table>
     	
