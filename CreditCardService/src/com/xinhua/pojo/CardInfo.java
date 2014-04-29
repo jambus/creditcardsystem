@@ -18,6 +18,8 @@ public class CardInfo {
 	private String cardBlockCode;
 	private String cardActiveCode;
 	
+	private String cardName;
+	
 	public String getAccountNumber() {
 		return accountNumber;
 	}
@@ -89,5 +91,12 @@ public class CardInfo {
 	}
 	public void setCardActiveCode(String cardActiveCode) {
 		this.cardActiveCode = cardActiveCode;
+	}
+	
+	public String getCardName() {
+		return cardName;
+	}
+	public void setCardName(String cardName) {
+		this.cardName = cardName;
 	}
 }

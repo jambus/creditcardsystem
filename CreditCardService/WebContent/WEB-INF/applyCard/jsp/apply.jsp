@@ -65,7 +65,7 @@
 				<td>我同意以下协议</td>
     			<span id="nullagree" style="display:none;" class="errorMsg">请同意协议</span>
     		</tr>
-    		<tr class="submitTr">
+    		<tr id="submitTr" class="submitTr">
     			<td colspan="2"><input type="submit" value="申     请" /></td>
     		</tr>
     	</table>
