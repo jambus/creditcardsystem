@@ -22,6 +22,10 @@
 		<action name="toApply" class="com.xinhua.action.NavigateAction">
 			<result name="success" type="tiles">creditcard.apply</result>
 		</action>
+		
+		<action name="toShowDetails" class="com.xinhua.action.CreditCardDetailsAction">
+			<result name="success" type="tiles">creditcard.showDetails</result>
+		</action>
 	</package>
 	
 </struts>

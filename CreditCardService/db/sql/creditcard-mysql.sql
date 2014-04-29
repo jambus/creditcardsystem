@@ -66,6 +66,7 @@ create table transactions(
 	cardNumber varchar(19) references cardinfo(cardNumber),
 	transactionCode varchar(3),
 	transactionAmount double,
+	transactionDescription varchar(255),
 	transactionDate date,
 	cycleFlag varchar(1),
 	merchantName varchar(255),

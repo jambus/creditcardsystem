@@ -96,6 +96,10 @@
 	float:right;
 }
 
+.cb{
+	clear:both;
+}
+
 .top {
 	width: 800px;
 	height: 100px;
@@ -130,4 +134,19 @@
 
 .post-layoutFooter{
 	
+}
+
+.welcomeClass{
+	padding-bottom: 20px;
+}
+
+.accountSummaryClass{
+	border: 1 solid;
+	height: auto;
+	padding-bottom: 30px;
+	padding-top: 10px;
+}
+
+.accountSummaryClass a{
+	padding-left: 30px;
 }

@@ -3,10 +3,14 @@ package com.xinhua.util;
 import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import com.xinhua.constant.Const;
 import com.xinhua.pojo.CardInfo;
+import com.xinhua.pojo.Transaction;
 import com.xinhua.pojo.UserInfo;
 
 public class GetCardInfo {
@@ -78,5 +82,43 @@ public class GetCardInfo {
 		cardInfo.setProductType(String.valueOf(Const.IIN.UNIONPAY.getProductType()));
 
 		return cardInfo;
+	}
+	
+	public static List<Transaction> generationTransactions(String cardNumber){
+		int row = random.nextInt(10);
+		List<Transaction> txnList = new ArrayList<Transaction>();
+		
+		String[] merchantNames = new String[]{"Apple Store","Sumsung store","百联集团","沃尔玛","携程","巴西烤肉","LV","希尔顿饭店"};
+		String[] merchantCodes = new String[]{"100",			"200",			"300",	"400",	"500","600","700","800"};
+		String[] txnDescriptions = new String[]{"Iphone","Note III","雪碧","方便面","泰国一日游","烤肉","LV包","酒店客房"};
+		String[] txnCodes = new String[]{"001",			"002",		"003","004","005",	  "006","007","010"};
+		for(int i=0;i<row;i++){
+			Transaction txn = new Transaction();
+			txn.setCardNumber(cardNumber);
+			txn.setCycleFlag(random.nextInt(1) == 1? Const.TXN_CYCLE_FLAG_BILLED:Const.TXN_CYCLE_FLAG_UNBILLED);
+			
+			int merchantIndex = random.nextInt(merchantNames.length);
+			txn.setMerchantName(merchantNames[merchantIndex]);
+			txn.setMerchantCode(merchantCodes[merchantIndex]);
+			double txnAmount = Double.valueOf(""+random.nextInt(10000000)).doubleValue()/100;
+			txn.setTransactionAmount(BigDecimal.valueOf(txnAmount));
+			txn.setTransactionCode(txnCodes[merchantIndex]);
+			txn.setTransactionDate(new Date());
+			txn.setTransactionDescription(txnDescriptions[merchantIndex]);
+			txn.setTransactionReferenceNumber(generateTxnReferenceNumber());
+			txnList.add(txn);
+		}
+		
+		return txnList; 
+	}
+	
+	private static String generateTxnReferenceNumber(){
+		String number = "";
+		 int a[] = new int[25];
+	      for(int i=0;i<a.length;i++) {
+	          a[i] = random.nextInt(10);
+	          number += a[i];
+	      }
+		return number;
 	}
 }

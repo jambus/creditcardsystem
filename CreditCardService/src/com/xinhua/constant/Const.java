@@ -14,6 +14,9 @@ public class Const {
 	public final static String CARD_INACTIVE = "N";
 	public final static String CARD_ACTIVE = "A";
 	
+	public final static String TXN_CYCLE_FLAG_UNBILLED = "U";
+	public final static String TXN_CYCLE_FLAG_BILLED = "B";
+	
 	public final static String CARDBLOCKCODE_NORMAL = " ";
 	public final static String CARDBLOCKCODE_LOST = "L";
 	public final static String CARDBLOCKCODE_INACTIVE = "N";

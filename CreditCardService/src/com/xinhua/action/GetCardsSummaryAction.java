@@ -46,9 +46,18 @@ public class GetCardsSummaryAction extends ActionSupport{
 				long customerNumber = ProfileUtil.getProfile().getCustomerNumber();
 				log.debug("CustomerNumber:"+ customerNumber);
 				
-				String accountNumber = cardInfoDao.getAccountNumberByCustomerID(customerNumber);
+				String accountNumber = ProfileUtil.getProfile().getAccountNumber();
 				
-				cardList = cardInfoDao.getCardListByAccountNumber(String.valueOf(accountNumber));
+				if(accountNumber ==null || "".equals(accountNumber)){
+					accountNumber = cardInfoDao.getAccountNumberByCustomerID(customerNumber);
+					ProfileUtil.getProfile().setAccountNumber(accountNumber);
+				}
+				
+				cardList = ProfileUtil.getProfile().getCardList();
+				if(cardList == null){
+					cardList = cardInfoDao.getCardListByAccountNumber(String.valueOf(accountNumber));
+					ProfileUtil.getProfile().setCardList(cardList);
+				}
 				
 				List<Map<String,String>> cardDetailsList = new ArrayList<Map<String,String>>();
 				for(CardInfo card : cardList){
@@ -75,6 +84,8 @@ public class GetCardsSummaryAction extends ActionSupport{
 					cardMap.put("cardName", cardName);
 					cardMap.put("cardNumber", card.getCardNumber());
 					cardMap.put("currentAmount", card.getCurrentAmount().toPlainString());
+					
+					card.setCardName(cardName);
 					
 					cardDetailsList.add(cardMap);
 				}

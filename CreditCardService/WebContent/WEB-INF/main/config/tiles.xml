@@ -23,6 +23,10 @@
     	<put-attribute name="body" value="/WEB-INF/main/jsp/myhome.jsp" />
     </definition>
     
+    <definition name="creditcard.showDetails" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/cardDetails/jsp/showDetails.jsp" />
+    </definition>
+    
     <definition name="creditcard.login" extends="prelogin_defaultLayout">
     	<put-attribute name="header" value="" />
     	<put-attribute name="body" value="/WEB-INF/userManager/jsp/login.jsp" />

@@ -8,17 +8,17 @@
 			+ path + "/";
 %>
 
-<div id="welcomeDiv">
+<div id="welcomeDiv" class="welcomeClass">
 	Welcome
 	<%=ProfileUtil.getProfile().getUserName()%>
 	to login credit card system. The login time:
 	<%=new java.util.Date().toString()%>
 </div>
 
-<div id="accountSummaryDiv"></div>
+<div id="accountSummaryDiv" class="accountSummaryClass"></div>
 
 <script type="text/x-mustache" id="summaryTmpl">
-	<a href="#">
+	<a href="toShowDetails.action?cardIndex={{index}}">
     <span>{{cardName}} {{cardNumber}} - </span>
 	<span>Current amount: {{currentAmount}}</span>
 	</a>
@@ -39,7 +39,8 @@
 		if (obj.status && obj.status == "ok" && obj.cardList) {
 			var temp = $("#summaryTmpl").html();
 			var renderData = "<div>Account Summary:</div>";
-			$(obj.cardList).each(function() {
+			$(obj.cardList).each(function(index) {
+				this.index = index;
 				renderData += Mustache.render(temp, this);
 			})
 			$("#accountSummaryDiv").html(renderData);
