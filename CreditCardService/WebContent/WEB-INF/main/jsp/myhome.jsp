@@ -17,16 +17,19 @@
 
 <div id="accountSummaryDiv" class="accountSummaryClass"></div>
 
-<script type="text/x-mustache" id="summaryTmpl">
-	<a href="toShowDetails.action?cardIndex={{index}}">
-    <span>{{cardName}} {{cardNumber}} - </span>
-	<span>Current amount: {{currentAmount}}</span>
+<script type="text/x-jsrender" id="summaryTmpl">
+	<div>Account Summary:</div>
+	{{if status=="ok"}}
+	{{for cardList}}
+	<a href="toShowDetails.action?cardIndex={{:cardIndex}}">
+    <span>{{:cardName}} {{:cardNumber}} - </span>
+	<span>Current amount: {{:currentAmount}}</span>
 	</a>
 	<br/>
-  </script>
-
-<script type="text/x-mustache" id="summaryTmplError">
-    <div>Sorry, get error to fetch the card information. Pls check with bank</div>
+	{{/for}}
+	{{else}}
+	<div>Sorry, get error to fetch the card information. Pls check with bank</div>
+	{{/if}}
   </script>
 
 <script type="text/javascript">
@@ -36,18 +39,8 @@
 		dataType : "json"
 	}).always(function(data) {
 		var obj = data;
-		if (obj.status && obj.status == "ok" && obj.cardList) {
-			var temp = $("#summaryTmpl").html();
-			var renderData = "<div>Account Summary:</div>";
-			$(obj.cardList).each(function(index) {
-				this.index = index;
-				renderData += Mustache.render(temp, this);
-			})
-			$("#accountSummaryDiv").html(renderData);
-		} else {
-			var temp = $("#summaryTmplError").html();
-			var renderData = Mustache.render(temp, {});
-			$("#accountSummaryDiv").html(renderData);
-		}
+		var temp = $.templates("#summaryTmpl");
+		var renderData = temp.render(obj);
+		$("#accountSummaryDiv").html(renderData);
 	});
 </script>

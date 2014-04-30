@@ -60,7 +60,8 @@ public class GetCardsSummaryAction extends ActionSupport{
 				}
 				
 				List<Map<String,String>> cardDetailsList = new ArrayList<Map<String,String>>();
-				for(CardInfo card : cardList){
+				for(int index=0;index<cardList.size();index++){
+					CardInfo card = cardList.get(index);
 					Map<String,String> cardMap = new HashMap<String,String>();
 					int productType = Integer.valueOf(card.getProductType());
 					String cardName = "Credit　Card";
@@ -84,8 +85,10 @@ public class GetCardsSummaryAction extends ActionSupport{
 					cardMap.put("cardName", cardName);
 					cardMap.put("cardNumber", card.getCardNumber());
 					cardMap.put("currentAmount", card.getCurrentAmount().toPlainString());
+					cardMap.put("cardIndex", ""+index);
 					
 					card.setCardName(cardName);
+					card.setCardIndex(index);
 					
 					cardDetailsList.add(cardMap);
 				}

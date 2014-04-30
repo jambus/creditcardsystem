@@ -14,5 +14,5 @@ public interface CardInfoDao {
 	int activeCard(CardInfo cardInfo);
 	CardInfo getCardInfoByUserName(String userName);
 	
-	List<Transaction> getTransactionsByCardNumber(String cardNumber);
+	List<Transaction> getTransactionsByCardNumber(CardInfo card);
 }

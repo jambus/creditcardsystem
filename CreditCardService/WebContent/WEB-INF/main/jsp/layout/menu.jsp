@@ -1,7 +1,10 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+
 <div id="menuBody">
-	<span><a href="#" class="menuButton">My home</a></span>
-	<span><a href="#" class="menuButton">Card details</a></span>
-	<span><a href="#" class="menuButton">Card block</a></span>
-	<span><a href="#" class="menuButton">Rewards</a></span>
-	<span><a href="logoff.action" class="menuButtonRed fr">Signoff</a></span>
+	<span><a href="#" class="menuButton">主页</a></span>
+	<span><a href="toShowDetails.action?cardIndex=0" class="menuButton">卡片详情</a></span>
+	<span><a href="#" class="menuButton">卡片挂失</a></span>
+	<span><a href="#" class="menuButton">卡片激活</a></span>
+	<span><a href="#" class="menuButton">用户管理</a></span>
+	<span><a href="logoff.action" class="menuButtonRed fr">退出</a></span>
 </div>

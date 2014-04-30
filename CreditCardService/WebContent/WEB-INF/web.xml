@@ -23,18 +23,39 @@
            org.apache.tiles.web.startup.TilesListener
        </listener-class>
     </listener>
+    
+    <filter>
+  		<filter-name>CharacterEncodingFilter</filter-name>
+  		<filter-class>
+    		org.apache.catalina.filters.SetCharacterEncodingFilter
+  		</filter-class>
+  		<init-param>
+    		<param-name>encoding</param-name>
+    		<param-value>UTF-8</param-value>
+  		</init-param>
+  		<init-param>
+    		<param-name>ignore</param-name>
+    		<param-value>true</param-value>
+  		</init-param>
+	</filter>
 	
 	<filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
     </filter>
 
+	<filter-mapping>
+ 		 <filter-name>CharacterEncodingFilter</filter-name>
+  		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
     <filter-mapping>
         <filter-name>struts2</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-	
+    
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
+  
 </web-app>

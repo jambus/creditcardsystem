@@ -1,6 +1,7 @@
 package com.xinhua.action;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,7 +90,8 @@ public class CreditCardDetailsAction extends ActionSupport{
 					}
 				}
 				
-				transactionList = cardInfoDao.getTransactionsByCardNumber(cardInfo.getCardNumber());
+				transactionList = cardInfoDao.getTransactionsByCardNumber(cardInfo);
+				
 			}
 		}
 		

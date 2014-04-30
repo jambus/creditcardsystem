@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -11,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.xinhua.constant.Const;
 import com.xinhua.dao.CardInfoDao;
 import com.xinhua.mybatis.MyBatisUtil;
 import com.xinhua.pojo.CardInfo;
@@ -108,21 +110,28 @@ public class CardInfoDaoImpl implements CardInfoDao {
 	}
 
 	@Override
-	public List<Transaction> getTransactionsByCardNumber(String cardNumber) {
+	public List<Transaction> getTransactionsByCardNumber(CardInfo card) {
 		
 		List<Transaction> txnList = null;
 		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
         try {
-        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        	txnList =  userMapper.getTransactionsByCardNumber(cardNumber);
-        	if(txnList == null || txnList.size()==0){
-        		List<Transaction> tmpTxnList = GetCardInfo.generationTransactions(cardNumber);
-        		for(Transaction txn:tmpTxnList){
-        			userMapper.addTransaction(txn);
-        		}
-        		txnList =  userMapper.getTransactionsByCardNumber(cardNumber);
+        	String cardNumber =  card.getCardNumber();
+        	
+        	if(Const.CARD_ACTIVE.equals(card.getCardActiveCode())){
+        	
+	        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+	        	txnList =  userMapper.getTransactionsByCardNumber(cardNumber);
+	        	if(txnList == null || txnList.size()==0){
+	        		List<Transaction> tmpTxnList = GetCardInfo.generationTransactions(cardNumber);
+	        		for(Transaction txn:tmpTxnList){
+	        			userMapper.addTransaction(txn);
+	        		}
+	        		txnList =  userMapper.getTransactionsByCardNumber(cardNumber);
+	        	}
+	            sqlSession.commit();
+        	}else{
+        		txnList = new ArrayList<Transaction>();
         	}
-            sqlSession.commit();
         }catch(Exception e){
         	log.error("getTransactionsByCardNumber:"+e.getMessage());
         	sqlSession.rollback();
