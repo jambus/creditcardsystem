@@ -3,7 +3,7 @@ package com.xinhua.dao;
 import java.util.List;
 
 import com.xinhua.pojo.CardInfo;
-import com.xinhua.pojo.User;
+import com.xinhua.pojo.Transaction;
 
 public interface CardInfoDao {
 
@@ -13,4 +13,6 @@ public interface CardInfoDao {
 	
 	int activeCard(CardInfo cardInfo);
 	CardInfo getCardInfoByUserName(String userName);
+	
+	List<Transaction> getTransactionsByCardNumber(String cardNumber);
 }

@@ -1,7 +1,9 @@
 package com.xinhua.action;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,6 +17,7 @@ import com.xinhua.dao.impl.CardInfoDaoImpl;
 import com.xinhua.dao.impl.UserDaoImpl;
 import com.xinhua.dao.impl.UserInfoDaoImpl;
 import com.xinhua.pojo.CardInfo;
+import com.xinhua.pojo.Transaction;
 import com.xinhua.pojo.User;
 import com.xinhua.pojo.UserInfo;
 import com.xinhua.util.GetCardInfo;
@@ -26,7 +29,19 @@ public class CreditCardDetailsAction extends ActionSupport{
 	
 	private int cardIndex = 0;
 	private List<CardInfo> cardlist = null;
+	private CardInfoDao cardInfoDao = new CardInfoDaoImpl();
 	
+	private List<Transaction> transactionList;
+	private Map<String,String> cardNumberDropDownMap = new HashMap<String,String>();
+	
+	public List<Transaction> getTransactionList() {
+		return transactionList;
+	}
+
+	public void setTransactionList(List<Transaction> transactionList) {
+		this.transactionList = transactionList;
+	}
+
 	public int getCardIndex() {
 		return cardIndex;
 	}
@@ -46,6 +61,10 @@ public class CreditCardDetailsAction extends ActionSupport{
 		return null;
 	}
 	
+	public Map<String,String> getCardNumberDropDownMap(){
+		return cardNumberDropDownMap;
+	}
+	
 	public String getCardAmountOwe(){
 		CardInfo card;
 		if(getCardDetails()!=null){
@@ -58,9 +77,21 @@ public class CreditCardDetailsAction extends ActionSupport{
 	public String execute(){
 		
 		if(ProfileUtil.isCustomerLogin()){
-			
+			CardInfo cardInfo = getCardDetails();
+			if(cardInfo!=null){
+				
+				List<CardInfo> list = ProfileUtil.getProfile().getCardList();
+				if(list !=null){
+					cardNumberDropDownMap.clear();
+					
+					for(int i=0;i<list.size();i++){
+						cardNumberDropDownMap.put(""+i, list.get(i).getCardName() + " "+ list.get(i).getCardNumber());
+					}
+				}
+				
+				transactionList = cardInfoDao.getTransactionsByCardNumber(cardInfo.getCardNumber());
+			}
 		}
-		
 		
 		return "success";
 	}

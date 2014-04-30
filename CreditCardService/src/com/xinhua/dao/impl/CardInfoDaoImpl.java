@@ -14,8 +14,10 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.xinhua.dao.CardInfoDao;
 import com.xinhua.mybatis.MyBatisUtil;
 import com.xinhua.pojo.CardInfo;
+import com.xinhua.pojo.Transaction;
 import com.xinhua.pojo.User;
 import com.xinhua.util.DBHelper;
+import com.xinhua.util.GetCardInfo;
 import com.xinhua.mybatis.UserMapper;
 
 public class CardInfoDaoImpl implements CardInfoDao {
@@ -59,32 +61,7 @@ public class CardInfoDaoImpl implements CardInfoDao {
 
 	@Override
 	public CardInfo getCardInfoByUserName(String userName) {
-		/*
-		String sql = "select * from cardinfo where userName = '" + userName + "'";
-		System.out.println(sql);
-		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		conn = DBHelper.getConnection();
 
-		CardInfo cardInfo = null;
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-
-			if (rs.next()) {
-				cardInfo = new CardInfo();
-				//cardInfo.setUser(user);
-				//cardInfo.setAccountNumber(rs.getString("accountNumber"));
-				//cardInfo.setAmount(rs.getBigDecimal("amount"));
-				//cardInfo.setStatus(rs.getString("status"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		DBHelper.free(conn, stmt);
-		*/
 		CardInfo cardInfo = null;
 		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
         try {
@@ -128,6 +105,33 @@ public class CardInfoDaoImpl implements CardInfoDao {
             sqlSession.close();
         }
 		return accountNumber;
+	}
+
+	@Override
+	public List<Transaction> getTransactionsByCardNumber(String cardNumber) {
+		
+		List<Transaction> txnList = null;
+		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        	txnList =  userMapper.getTransactionsByCardNumber(cardNumber);
+        	if(txnList == null || txnList.size()==0){
+        		List<Transaction> tmpTxnList = GetCardInfo.generationTransactions(cardNumber);
+        		for(Transaction txn:tmpTxnList){
+        			userMapper.addTransaction(txn);
+        		}
+        		txnList =  userMapper.getTransactionsByCardNumber(cardNumber);
+        	}
+            sqlSession.commit();
+        }catch(Exception e){
+        	log.error("getTransactionsByCardNumber:"+e.getMessage());
+        	sqlSession.rollback();
+        }
+        finally {
+            sqlSession.close();
+        }
+
+		return txnList;
 	}
 
 }

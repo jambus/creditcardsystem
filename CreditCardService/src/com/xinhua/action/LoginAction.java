@@ -53,6 +53,7 @@ public class LoginAction extends ActionSupport{
 				
 				if(Const.USERSTATUS_ACTIVE.equals(user.getStatus()) && inputPassword.equals(user.getPassword())){
 					forward = "home";
+					ProfileUtil.cleanProfile();
 					ProfileUtil.getProfile().setCustomerType(Const.CUSTOMERTYPE_CUSTOMER);
 					ProfileUtil.getProfile().setUserName(user.getUserName());
 					ProfileUtil.getProfile().setCustomerNumber(user.getCustomerNumber());

@@ -36,13 +36,20 @@
         select accountNumber from accountInfo where customerNumber =#{customerNumber}
     </select>
     
-    
-    
     <insert id="addUser" parameterType="com.xinhua.pojo.User">
     	insert into userpass (userName,password,failloginCount,status,customerNumber) values(#{userName},#{password},#{failloginCount},#{status},#{customerNumber})
 	</insert>
 	
-	<select id="getCardInfoByUserName" resultType="com.xinhua.pojo.CardInfo" parameterType="java.lang.String">
+    <select id="getCardInfoByUserName" resultType="com.xinhua.pojo.CardInfo" parameterType="java.lang.String">
         select * from cardinfo where userName =#{userName}
     </select>
+    
+    <select id="getTransactionsByCardNumber" resultType="com.xinhua.pojo.Transaction" parameterType="java.lang.String">
+        select * from transactions where cardNumber =#{cardNumber}
+    </select>
+    
+	<insert id="addTransaction" parameterType="com.xinhua.pojo.Transaction">
+    	insert into transactions (transactionReferenceNumber,cardNumber,transactionCode,transactionAmount,transactionDescription,transactionDate,cycleFlag,merchantName,merchantCode) values(#{transactionReferenceNumber},#{cardNumber},#{transactionCode},#{transactionAmount},#{transactionDescription},#{transactionDate},#{cycleFlag},#{merchantName},#{merchantCode})
+	</insert>
+    
 </mapper>

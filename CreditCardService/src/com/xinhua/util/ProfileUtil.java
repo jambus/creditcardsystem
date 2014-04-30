@@ -29,4 +29,12 @@ public class ProfileUtil {
 	public static SysProfile getProfile(){
 		return profile;
 	}
+	
+	public static SysProfile cleanProfile(){
+		ActionContext actionContext = ActionContext.getContext();
+		Map session = actionContext.getSession();
+		session.put(Const.SYSPROFILE, new SysProfile()); 
+		profile = (SysProfile)session.get(Const.SYSPROFILE);
+		return profile;
+	}
 }
