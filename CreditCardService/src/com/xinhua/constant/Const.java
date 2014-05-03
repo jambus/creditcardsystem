@@ -12,7 +12,7 @@ public class Const {
 	public final static String CUSTOMERTYPE_NEW = "N";
 	
 	public final static String CARD_INACTIVE = "N";
-	public final static String CARD_ACTIVE = "A";
+	public final static String CARD_ACTIVE = "Y";
 	
 	public final static String TXN_CYCLE_FLAG_UNBILLED = "U";
 	public final static String TXN_CYCLE_FLAG_BILLED = "B";

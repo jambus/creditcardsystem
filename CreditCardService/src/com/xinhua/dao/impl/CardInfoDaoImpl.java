@@ -45,19 +45,20 @@ public class CardInfoDaoImpl implements CardInfoDao {
 
 	@Override
 	public int activeCard(CardInfo cardInfo) {
-		String sql = "update cardinfo set status = 'ACTIVE' where accountNumber = '"+cardInfo.getAccountNumber()+"'";
-		System.out.println(sql);
+		
 		int lines = 0;
-		Connection conn = null;
-		Statement stmt = null;
-		conn = DBHelper.getConnection();
-		try {
-			stmt = conn.createStatement();
-			lines = stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		DBHelper.free(conn, stmt);
+		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        	lines = userMapper.activeCard(cardInfo.getCardNumber());
+            sqlSession.commit();
+        } catch(Exception e){
+        	log.error("activeCard:"+e.getMessage());
+        	sqlSession.rollback();
+        }
+        finally {
+            sqlSession.close();
+        }
 		return lines;
 	}
 

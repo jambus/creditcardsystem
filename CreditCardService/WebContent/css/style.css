@@ -150,3 +150,12 @@
 .accountSummaryClass a{
 	padding-left: 30px;
 }
+
+.cardInactive{
+	color:red;
+}
+
+.errorMsg {
+	color: red;
+	font-size: 8px;
+}

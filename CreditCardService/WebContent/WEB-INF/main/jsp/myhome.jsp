@@ -20,13 +20,20 @@
 <script type="text/x-jsrender" id="summaryTmpl">
 	<div>Account Summary:</div>
 	{{if status=="ok"}}
-	{{for cardList}}
-	<a href="toShowDetails.action?cardIndex={{:cardIndex}}">
-    <span>{{:cardName}} {{:cardNumber}} - </span>
-	<span>Current amount: {{:currentAmount}}</span>
-	</a>
-	<br/>
-	{{/for}}
+		{{for cardList}}
+			{{if cardActive=="Y"}}	
+			<a href="toShowDetails.action?cardIndex={{:cardIndex}}">
+    		<span>{{:cardName}} {{:cardNumber}} - </span>
+			<span>Current amount: {{:currentAmount}}</span>
+			</a>
+			<br/>
+			{{else}}
+			<a href="toActiveCard.action?cardIndex={{:cardIndex}}">
+			<span>{{:cardName}} {{:cardNumber}} - </span>
+			<span class="cardInactive">The card is not activated.</span>
+			<br/>
+			{{/if}}
+		{{/for}}
 	{{else}}
 	<div>Sorry, get error to fetch the card information. Pls check with bank</div>
 	{{/if}}

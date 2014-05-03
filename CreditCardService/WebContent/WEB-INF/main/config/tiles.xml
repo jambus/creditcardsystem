@@ -25,6 +25,18 @@
     	<put-attribute name="body" value="/WEB-INF/cardDetails/jsp/showDetails.jsp" />
     </definition>
     
+    <definition name="creditcard.activeCardInput" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/activeCard/jsp/input.jsp" />
+    </definition>
+    
+    <definition name="creditcard.activeCardRecap" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/activeCard/jsp/recap.jsp" />
+    </definition>
+    
+    <definition name="creditcard.activeCardConfirm" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/activeCard/jsp/confirm.jsp" />
+    </definition>
+    
     <definition name="creditcard.login" extends="prelogin_defaultLayout">
     	<put-attribute name="header" value="" />
     	<put-attribute name="body" value="/WEB-INF/userManager/jsp/login.jsp" />

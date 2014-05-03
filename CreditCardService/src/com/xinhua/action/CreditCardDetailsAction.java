@@ -22,6 +22,7 @@ import com.xinhua.pojo.Transaction;
 import com.xinhua.pojo.User;
 import com.xinhua.pojo.UserInfo;
 import com.xinhua.util.GetCardInfo;
+import com.xinhua.util.PageComponentBuildUtil;
 import com.xinhua.util.ProfileUtil;
 
 public class CreditCardDetailsAction extends ActionSupport{
@@ -63,7 +64,7 @@ public class CreditCardDetailsAction extends ActionSupport{
 	}
 	
 	public Map<String,String> getCardNumberDropDownMap(){
-		return cardNumberDropDownMap;
+		return PageComponentBuildUtil.buildCardSelectDropdown();
 	}
 	
 	public String getCardAmountOwe(){
@@ -80,18 +81,7 @@ public class CreditCardDetailsAction extends ActionSupport{
 		if(ProfileUtil.isCustomerLogin()){
 			CardInfo cardInfo = getCardDetails();
 			if(cardInfo!=null){
-				
-				List<CardInfo> list = ProfileUtil.getProfile().getCardList();
-				if(list !=null){
-					cardNumberDropDownMap.clear();
-					
-					for(int i=0;i<list.size();i++){
-						cardNumberDropDownMap.put(""+i, list.get(i).getCardName() + " "+ list.get(i).getCardNumber());
-					}
-				}
-				
 				transactionList = cardInfoDao.getTransactionsByCardNumber(cardInfo);
-				
 			}
 		}
 		

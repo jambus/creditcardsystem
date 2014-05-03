@@ -86,6 +86,7 @@ public class GetCardsSummaryAction extends ActionSupport{
 					cardMap.put("cardNumber", card.getCardNumber());
 					cardMap.put("currentAmount", card.getCurrentAmount().toPlainString());
 					cardMap.put("cardIndex", ""+index);
+					cardMap.put("cardActive", card.getCardActiveCode());
 					
 					card.setCardName(cardName);
 					card.setCardIndex(index);

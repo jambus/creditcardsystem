@@ -26,6 +26,19 @@
 		<action name="toShowDetails" class="com.xinhua.action.CreditCardDetailsAction">
 			<result name="success" type="tiles">creditcard.showDetails</result>
 		</action>
+		
+		<action name="toActiveCard" class="com.xinhua.action.ActiveCardAction">
+			<result name="success" type="tiles">creditcard.activeCardInput</result>
+		</action>
+		
+		<action name="toActiveCardRecap" class="com.xinhua.action.ActiveCardRecapAction">
+			<result name="success" type="tiles">creditcard.activeCardRecap</result>
+			<result name="input" type="tiles">creditcard.activeCardInput</result>
+		</action>
+		
+		<action name="toActiveCardConfirm" class="com.xinhua.action.ActiveCardConfirmAction">
+			<result name="success" type="tiles">creditcard.activeCardConfirm</result>
+		</action>
 	</package>
 	
 </struts>

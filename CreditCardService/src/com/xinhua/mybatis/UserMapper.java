@@ -10,7 +10,7 @@ import com.xinhua.pojo.UserInfo;
 
 public interface UserMapper {
 	public int addCardInfo(CardInfo cardInfo);
-	public int activeCard(CardInfo cardInfo);
+
 	public CardInfo getCardInfoByUserName(String userName);
 	
 	public int addUser(User user);
@@ -29,4 +29,6 @@ public interface UserMapper {
 	
 	public List<Transaction> getTransactionsByCardNumber(String cardNumber);
 	public int addTransaction(Transaction txn);
+	
+	public int activeCard(String cardNumber);
 }

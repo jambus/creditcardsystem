@@ -51,5 +51,9 @@
 	<insert id="addTransaction" parameterType="com.xinhua.pojo.Transaction">
     	insert into transactions (transactionReferenceNumber,cardNumber,transactionCode,transactionAmount,transactionDescription,transactionDate,cycleFlag,merchantName,merchantCode) values(#{transactionReferenceNumber},#{cardNumber},#{transactionCode},#{transactionAmount},#{transactionDescription},#{transactionDate},#{cycleFlag},#{merchantName},#{merchantCode})
 	</insert>
+	
+	<update id="activeCard" parameterType="java.lang.String">
+	    update cardinfo set cardActiveCode = 'Y' where cardNumber = #{cardNumber}
+	</update>
     
 </mapper>

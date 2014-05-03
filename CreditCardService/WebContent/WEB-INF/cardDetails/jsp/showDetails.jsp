@@ -18,10 +18,18 @@ function cardChange(){
 			<div>Current amount: ${cardDetails.currentAmount} Yuan</div>
 			<div>Credit limit: ${cardDetails.creditLimit} Yuan</div>
 			<div>Credit owe: ${cardAmountOwe} Yuan</div>
+			
+			<s:if test='"Y"==cardDetails.cardActiveCode'>
+			<div>Card status: Active</div>
+			</s:if>
+			<s:else>
+			<div class="cardInactive">Card status: Inactive</div>
+			</s:else>
 		</div>
 		</s:form>
 	</div>
 	
+	<s:if test='"Y"==cardDetails.cardActiveCode'>
 	<div>
 		<div id="txnTitle" class="cb">交易详情</div>
 		<div id="txnTableHeader">
@@ -43,4 +51,6 @@ function cardChange(){
 			</s:iterator>
 		</div>
 	</div>
+	</s:if>
+	
 </div>
