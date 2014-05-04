@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class UserInfo {
-	private Timestamp birthday;
+	private String birthday;
 	private String address;
 	private double salary;
 	private String tel;
@@ -15,10 +15,10 @@ public class UserInfo {
 	private String idNumber;
 	
 	
-	public Timestamp getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Timestamp birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	

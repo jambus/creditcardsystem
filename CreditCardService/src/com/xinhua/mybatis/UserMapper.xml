@@ -16,6 +16,10 @@
     	insert into accountInfo (accountNumber,customerNumber) values(#{accountNumber},#{customerNumber})
 	</insert>
 	
+	<select id="getAccountNumberForUser" parameterType="com.xinhua.pojo.UserInfo" resultType="java.lang.String">
+    	select accountNumber from accountInfo where customerNumber =#{customerNumber}
+	</select>
+	
 	<select id="getAccountNumberForUsmodifyUserInfoer" parameterType="com.xinhua.pojo.UserInfo" resultType="java.lang.String">
     	select accountNumber from accountInfo where customerNumber =#{customerNumber}
 	</select>

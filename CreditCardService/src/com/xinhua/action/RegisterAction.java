@@ -1,6 +1,10 @@
 package com.xinhua.action;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -85,9 +89,17 @@ public class RegisterAction extends ActionSupport{
 		}else{
 			UserInfo systemUserInfo = userInfoImpl.getUserInfoById(userInfo.getIdNumber());
 			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-M-d");
+			String formatBirthday = "";
+			try {
+				formatBirthday = sdf2.format(sdf.parse(systemUserInfo.getBirthday()));
+			} catch (ParseException e) {
+				formatBirthday = "";
+			}
 			if(!userInfo.getFirstName().equals(systemUserInfo.getFirstName())
 					|| !userInfo.getLastName().equals(systemUserInfo.getLastName())
-					|| !FormatHelper.getBirthday(userInfo.getBirthday()).equals(FormatHelper.getBirthday(systemUserInfo.getBirthday()))
+					|| !userInfo.getBirthday().equals(formatBirthday)
 					|| !userInfo.getIdNumber().equals(systemUserInfo.getIdNumber())
 					|| !userInfo.getTel().equals(systemUserInfo.getTel())
 					){
