@@ -9,12 +9,23 @@
 		<result-types>  
 	  		<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>  
 		</result-types>  
+		
+		<interceptors>
+		    <interceptor name="auth" class="com.xinhua.interceptor.AuthorizationInterceptor"></interceptor>
+			
+		    <interceptor-stack name="authorize">
+		        <interceptor-ref name="defaultStack"></interceptor-ref>
+		        <interceptor-ref name="auth"></interceptor-ref>
+		    </interceptor-stack>
+		</interceptors>
 	
 		<global-results>  
 	    	<result name="error" type="tiles">creditcard.error</result>  
+	    	<result name="login" type="tiles">creditcard.login</result>
 	  	</global-results>
 	  	
 		<action name="home" class="com.xinhua.action.NavigateAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.myhome</result>
 		</action>
 	</package>

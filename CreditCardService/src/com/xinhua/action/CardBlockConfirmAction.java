@@ -49,15 +49,13 @@ public class CardBlockConfirmAction extends ActionSupport {
 
 	public String execute(){
 		
-		if(ProfileUtil.isCustomerLogin()){
-			cardInfoDao.cardblock(getCardDetails());
+		cardInfoDao.cardblock(getCardDetails());
 			
-			String accountNumber = ProfileUtil.getProfile().getAccountNumber();
-			List<CardInfo> cardList = cardInfoDao.getCardListByAccountNumber(accountNumber);
-			cardList = GetCardInfo.getCreditCardAdditionalData(cardList);
-			this.cardlist = cardList;
-			ProfileUtil.getProfile().setCardList(cardList);
-		}
+		String accountNumber = ProfileUtil.getProfile().getAccountNumber();
+		List<CardInfo> cardList = cardInfoDao.getCardListByAccountNumber(accountNumber);
+		cardList = GetCardInfo.getCreditCardAdditionalData(cardList);
+		this.cardlist = cardList;
+		ProfileUtil.getProfile().setCardList(cardList);
 		
 		return SUCCESS;
 	}

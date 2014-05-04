@@ -10,13 +10,22 @@
   			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>  
 		</result-types> 
 		
+		<interceptors>
+		    <interceptor name="auth" class="com.xinhua.interceptor.AuthorizationInterceptor"></interceptor>
+			
+		    <interceptor-stack name="authorize">
+		        <interceptor-ref name="defaultStack"></interceptor-ref>
+		        <interceptor-ref name="auth"></interceptor-ref>
+		    </interceptor-stack>
+		</interceptors>
+		
 		<global-results>  
 	    	<result name="error" type="tiles">creditcard.error</result>  
+	    	<result name="login" type="tiles">creditcard.login</result>
 	  	</global-results>
 		
 		<action name="login" class="com.xinhua.action.LoginAction">
 			<result name="home" type="redirect">home.action</result>
-			<result name="login" type="tiles">creditcard.login</result>
 			<result name="input" type="tiles">creditcard.login</result>
 		</action>
 		<action name="toRegister" class="com.xinhua.action.ToRegisterAction">
@@ -36,15 +45,18 @@
 		</action>
 		
 		<action name="toPrivateUpdate" class="com.xinhua.action.PrivateUpdateAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.PrivateUpdateInput</result>
 		</action>
 		
 		<action name="toPrivateUpdateRecap" class="com.xinhua.action.PrivateUpdateRecapAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.PrivateUpdateRecap</result>
 			<result name="input" type="tiles">creditcard.PrivateUpdateInput</result>
 		</action>
 		
 		<action name="toPrivateUpdateConfirm" class="com.xinhua.action.PrivateUpdateConfirmAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.PrivateUpdateConfirm</result>
 		</action>
 		

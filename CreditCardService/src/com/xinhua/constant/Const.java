@@ -28,6 +28,8 @@ public class Const {
 	public final static String CARDLOGO_SILVER = "200";
 	public final static String CARDLOGO_GOLD = "300";
 	
+	public final static String FORWARD_LOGIN = "login";
+	
 	public static enum IIN {
 		VISA(4,70), MASTERCARD(5,71), UNIONPAY(62,72);
 

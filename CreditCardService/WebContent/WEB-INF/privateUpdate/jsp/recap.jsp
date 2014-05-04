@@ -11,7 +11,7 @@ function doSubmit(){
 <div id="privateUpdateDiv">
 	<div id="privateUpdateTitle" class="cb">用户管理</div>
 	<div class="cb">
-		<s:form action="toPrivateUpdateConfirm.action">
+		<s:form action="toPrivateUpdateConfirm">
 		<div class="fl">
 			<div>Name:${userinfo.firstName} ${userinfo.lastName}</div>
 			<div>Address:

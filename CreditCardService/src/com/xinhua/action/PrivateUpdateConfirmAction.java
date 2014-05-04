@@ -28,17 +28,17 @@ public class PrivateUpdateConfirmAction extends ActionSupport {
 
 	public String execute(){
 		
-		if(ProfileUtil.isCustomerLogin()){
-			long customerNumber = ProfileUtil.getProfile().getCustomerNumber();
-			UserInfo userinfotemp = userInfoDao.getUserInfoByCustomerNumber(customerNumber);
-			userinfotemp.setAddress(userinfo.getAddress());
-			userinfotemp.setMail(userinfo.getMail());
-			userinfotemp.setTel(userinfo.getTel());
+
+		long customerNumber = ProfileUtil.getProfile().getCustomerNumber();
+		UserInfo userinfotemp = userInfoDao.getUserInfoByCustomerNumber(customerNumber);
+		userinfotemp.setAddress(userinfo.getAddress());
+		userinfotemp.setMail(userinfo.getMail());
+		userinfotemp.setTel(userinfo.getTel());
 			
-			userInfoDao.modifyUserInfo(userinfotemp);
+		userInfoDao.modifyUserInfo(userinfotemp);
 			
-			userinfo = userInfoDao.getUserInfoByCustomerNumber(customerNumber);
-		}
+		userinfo = userInfoDao.getUserInfoByCustomerNumber(customerNumber);
+		
 		return SUCCESS;
 		
 	}

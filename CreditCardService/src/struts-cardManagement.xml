@@ -10,8 +10,18 @@
   			<result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>  
 		</result-types> 
 		
+		<interceptors>
+		    <interceptor name="auth" class="com.xinhua.interceptor.AuthorizationInterceptor"></interceptor>
+			
+		    <interceptor-stack name="authorize">
+		        <interceptor-ref name="defaultStack"></interceptor-ref>
+		        <interceptor-ref name="auth"></interceptor-ref>
+		    </interceptor-stack>
+		</interceptors>
+		
 		<global-results>  
 	    	<result name="error" type="tiles">creditcard.error</result>  
+	    	<result name="login" type="tiles">creditcard.login</result>
 	  	</global-results>
 		
 		<action name="apply" class="com.xinhua.action.ApplyCreditCardAction">
@@ -24,31 +34,38 @@
 		</action>
 		
 		<action name="toShowDetails" class="com.xinhua.action.CreditCardDetailsAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.showDetails</result>
 		</action>
 		
 		<action name="toActiveCard" class="com.xinhua.action.ActiveCardAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.activeCardInput</result>
 		</action>
 		
 		<action name="toActiveCardRecap" class="com.xinhua.action.ActiveCardRecapAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.activeCardRecap</result>
 			<result name="input" type="tiles">creditcard.activeCardInput</result>
 		</action>
 		
 		<action name="toActiveCardConfirm" class="com.xinhua.action.ActiveCardConfirmAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.activeCardConfirm</result>
 		</action>
 		
 		<action name="toCardBlock" class="com.xinhua.action.CardBlockAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.CardBlockInput</result>
 		</action>
 		
 		<action name="toCardBlockRecap" class="com.xinhua.action.CardBlockRecapAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 			<result name="success" type="tiles">creditcard.CardBlockRecap</result>
 		</action>
 		
 		<action name="toCardBlockConfirm" class="com.xinhua.action.CardBlockConfirmAction">
+		    <interceptor-ref name="authorize"></interceptor-ref>
 		    <result name="input" type="tiles">creditcard.CardBlockRecap</result>
 			<result name="success" type="tiles">creditcard.CardBlockConfirm</result>
 		</action>

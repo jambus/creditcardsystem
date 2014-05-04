@@ -28,10 +28,9 @@ public class PrivateUpdateAction extends ActionSupport{
 
 	public String execute(){
 		
-		if(ProfileUtil.isCustomerLogin()){
-			long customerNumber = ProfileUtil.getProfile().getCustomerNumber();
-			userinfo = userInfoDao.getUserInfoByCustomerNumber(customerNumber);
-		}
+		long customerNumber = ProfileUtil.getProfile().getCustomerNumber();
+		userinfo = userInfoDao.getUserInfoByCustomerNumber(customerNumber);
+		
 		return SUCCESS;
 	}
 }

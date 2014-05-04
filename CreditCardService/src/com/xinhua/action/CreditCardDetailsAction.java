@@ -77,11 +77,9 @@ public class CreditCardDetailsAction extends ActionSupport{
 
 	public String execute(){
 		
-		if(ProfileUtil.isCustomerLogin()){
-			CardInfo cardInfo = getCardDetails();
-			if(cardInfo!=null){
-				transactionList = cardInfoDao.getTransactionsByCardNumber(cardInfo);
-			}
+		CardInfo cardInfo = getCardDetails();
+		if(cardInfo!=null){
+			transactionList = cardInfoDao.getTransactionsByCardNumber(cardInfo);
 		}
 		
 		return "success";

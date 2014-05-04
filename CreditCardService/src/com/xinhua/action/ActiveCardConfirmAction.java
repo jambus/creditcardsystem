@@ -50,15 +50,13 @@ public class ActiveCardConfirmAction extends ActionSupport {
 
 	public String execute(){
 		
-		if(ProfileUtil.isCustomerLogin()){
-			cardInfoDao.activeCard(getCardDetails());
+		cardInfoDao.activeCard(getCardDetails());
 			
-			String accountNumber = ProfileUtil.getProfile().getAccountNumber();
-			List<CardInfo> cardList = cardInfoDao.getCardListByAccountNumber(accountNumber);
-			cardList = GetCardInfo.getCreditCardAdditionalData(cardList);
-			this.cardlist = cardList;
-			ProfileUtil.getProfile().setCardList(cardList);
-		}
+		String accountNumber = ProfileUtil.getProfile().getAccountNumber();
+		List<CardInfo> cardList = cardInfoDao.getCardListByAccountNumber(accountNumber);
+		cardList = GetCardInfo.getCreditCardAdditionalData(cardList);
+		this.cardlist = cardList;
+		ProfileUtil.getProfile().setCardList(cardList);
 		
 		return SUCCESS;
 	}
