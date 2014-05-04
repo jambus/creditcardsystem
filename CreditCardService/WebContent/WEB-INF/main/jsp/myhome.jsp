@@ -22,15 +22,25 @@
 	{{if status=="ok"}}
 		{{for cardList}}
 			{{if cardActive=="Y"}}	
-			<a href="toShowDetails.action?cardIndex={{:cardIndex}}">
-    		<span>{{:cardName}} {{:cardNumber}} - </span>
-			<span>Current amount: {{:currentAmount}}</span>
-			</a>
-			<br/>
+				{{if cardBlock=="L"}}
+					<a href="toShowDetails.action?cardIndex={{:cardIndex}}">
+    				<span>{{:cardName}} {{:cardNumber}} - </span>
+					<span>Current amount: {{:currentAmount}} -</span>
+					<span class="cardInactive">The card has blocked/Lost</span>
+					</a>
+					<br/>
+				{{else}}
+					<a href="toShowDetails.action?cardIndex={{:cardIndex}}">
+    				<span>{{:cardName}} {{:cardNumber}} - </span>
+					<span>Current amount: {{:currentAmount}}</span>
+					</a>
+					<br/>
+				{{/if}}
 			{{else}}
 			<a href="toActiveCard.action?cardIndex={{:cardIndex}}">
 			<span>{{:cardName}} {{:cardNumber}} - </span>
 			<span class="cardInactive">The card is not activated.</span>
+			</a>
 			<br/>
 			{{/if}}
 		{{/for}}

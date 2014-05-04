@@ -6,7 +6,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.xinhua.constant.Const;
 import com.xinhua.pojo.CardInfo;
@@ -82,6 +84,40 @@ public class GetCardInfo {
 		cardInfo.setProductType(String.valueOf(Const.IIN.UNIONPAY.getProductType()));
 
 		return cardInfo;
+	}
+	
+	public static List<CardInfo> getCreditCardAdditionalData(List<CardInfo> cardList){
+		
+		if(cardList ==null || cardList.size() ==0){
+			return cardList;
+		}
+		for(int index=0;index<cardList.size();index++){
+			CardInfo card = cardList.get(index);
+			
+			int productType = Integer.valueOf(card.getProductType());
+			String cardName = "Credit　Card";
+			if(Const.IIN.MASTERCARD.getProductType() == productType){
+				cardName = "Master Card";
+			}else if(Const.IIN.VISA.getProductType() == productType){
+				cardName = "Visa";
+			}else if(Const.IIN.UNIONPAY.getProductType() == productType){
+				cardName = "Union Pay";
+			}
+			
+			String logo = card.getCardLogo();
+			if(Const.CARDLOGO_NORMAL == logo){
+				cardName += "";
+			}else if(Const.CARDLOGO_SILVER == logo){
+				cardName += "Silver";
+			}else if(Const.CARDLOGO_GOLD == logo){
+				cardName += "Gold";
+			}
+			
+			card.setCardName(cardName);
+			card.setCardIndex(index);
+			
+		}
+		return cardList;
 	}
 	
 	public static List<Transaction> generationTransactions(String cardNumber){

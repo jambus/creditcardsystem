@@ -53,9 +53,8 @@ public class CreditCardDetailsAction extends ActionSupport{
 	}
 	
 	public CardInfo getCardDetails(){
-		if(cardlist ==null){
-			cardlist = ProfileUtil.getProfile().getCardList();
-		}
+
+		cardlist = ProfileUtil.getProfile().getCardList();
 		
 		if(cardlist!=null && cardlist.size() > cardIndex){
 			return cardlist.get(cardIndex);

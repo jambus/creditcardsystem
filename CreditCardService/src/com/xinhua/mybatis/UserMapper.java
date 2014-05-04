@@ -31,4 +31,6 @@ public interface UserMapper {
 	public int addTransaction(Transaction txn);
 	
 	public int activeCard(String cardNumber);
+	
+	public int cardblock(String cardNumber);
 }

@@ -11,7 +11,7 @@ import com.xinhua.pojo.CardInfo;
 import com.xinhua.util.PageComponentBuildUtil;
 import com.xinhua.util.ProfileUtil;
 
-public class ActiveCardRecapAction extends ActionSupport{
+public class CardBlockRecapAction extends ActionSupport{
 
 	private int cardIndex = 0;
 	private List<CardInfo> cardlist = null;
@@ -48,6 +48,7 @@ public class ActiveCardRecapAction extends ActionSupport{
 	}
 	
 	public CardInfo getCardDetails(){
+
 		cardlist = ProfileUtil.getProfile().getCardList();
 		
 		if(cardlist!=null && cardlist.size() > cardIndex){
@@ -56,13 +57,13 @@ public class ActiveCardRecapAction extends ActionSupport{
 		return null;
 	}
 	
-	public String getCardStatus(){
+	public String getCardBlockCode(){
 		 if(getCardDetails()!=null){
-			 String status =  getCardDetails().getCardActiveCode();
-			 if(Const.CARD_ACTIVE.equals(status)){
-				 return "Active";
+			 String status =  getCardDetails().getCardBlockCode();
+			 if(Const.CARDBLOCKCODE_LOST.equals(status)){
+				 return "Lost/Block";
 			 }else{
-				 return "Not Active";
+				 return "OK";
 			 }
 		 }
 		 return "Unknown status";
@@ -80,19 +81,9 @@ public class ActiveCardRecapAction extends ActionSupport{
 		if(card == null){
 			this.addFieldError("cardEmbossName", "Unknown Error!");
 		}else{
-		
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
 			
-			if("".equals(getCardEmbossName())){
-				this.addFieldError("cardEmbossName", "卡片用户名不能为空！");
-			}else if(!card.getCardEmbossName().equals(getCardEmbossName())){
-				this.addFieldError("cardEmbossName", "卡片用户名验证失败！");
-			}
-			
-			if("".equals(getCardExpireDate())){
-				this.addFieldError("cardExpireDate", "卡号过期时间不能为空！");
-			}else if(!(sdf.format(card.getCardExpireDate()).equals(getCardExpireDate()))){
-				this.addFieldError("cardExpireDate", "卡片过期时间验证失败！");
+			if(!Const.CARD_ACTIVE.equals(card.getCardActiveCode())){
+				this.addFieldError("cardBlock", "卡片未激活，无法完成操作，请与银行柜台联系");
 			}
 		}
 	}

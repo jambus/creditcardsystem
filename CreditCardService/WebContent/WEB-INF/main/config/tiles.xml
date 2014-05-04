@@ -66,4 +66,16 @@
     <definition name="creditcard.error" extends="prelogin_defaultLayout">
     	<put-attribute name="body" value="/WEB-INF/main/jsp/genericError.jsp" />
     </definition>
+    
+    <definition name="creditcard.CardBlockInput" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/cardblock/jsp/input.jsp" />
+    </definition>
+    
+    <definition name="creditcard.CardBlockRecap" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/cardblock/jsp/recap.jsp" />
+    </definition>
+    
+    <definition name="creditcard.CardBlockConfirm" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/cardblock/jsp/confirm.jsp" />
+    </definition>
 </tiles-definitions>

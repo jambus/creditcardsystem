@@ -10,7 +10,7 @@ import com.xinhua.pojo.CardInfo;
 import com.xinhua.util.GetCardInfo;
 import com.xinhua.util.ProfileUtil;
 
-public class ActiveCardConfirmAction extends ActionSupport {
+public class CardBlockConfirmAction extends ActionSupport {
 
 	private int cardIndex = 0;
 	private List<CardInfo> cardlist = null;
@@ -24,7 +24,6 @@ public class ActiveCardConfirmAction extends ActionSupport {
 	}
 	
 	public CardInfo getCardDetails(){
-
 		cardlist = ProfileUtil.getProfile().getCardList();
 		
 		if(cardlist!=null && cardlist.size() > cardIndex){
@@ -33,13 +32,13 @@ public class ActiveCardConfirmAction extends ActionSupport {
 		return null;
 	}
 	
-	public String getCardStatus(){
+	public String getCardBlockCode(){
 		 if(getCardDetails()!=null){
-			 String status =  getCardDetails().getCardActiveCode();
-			 if(Const.CARD_ACTIVE.equals(status)){
-				 return "Active";
+			 String status =  getCardDetails().getCardBlockCode();
+			 if(Const.CARDBLOCKCODE_LOST.equals(status)){
+				 return "Lost/Block";
 			 }else{
-				 return "Not Active";
+				 return "OK";
 			 }
 		 }
 		 return "Unknown status";
@@ -51,7 +50,7 @@ public class ActiveCardConfirmAction extends ActionSupport {
 	public String execute(){
 		
 		if(ProfileUtil.isCustomerLogin()){
-			cardInfoDao.activeCard(getCardDetails());
+			cardInfoDao.cardblock(getCardDetails());
 			
 			String accountNumber = ProfileUtil.getProfile().getAccountNumber();
 			List<CardInfo> cardList = cardInfoDao.getCardListByAccountNumber(accountNumber);

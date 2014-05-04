@@ -55,5 +55,9 @@
 	<update id="activeCard" parameterType="java.lang.String">
 	    update cardinfo set cardActiveCode = 'Y' where cardNumber = #{cardNumber}
 	</update>
-    
+	
+	<update id="cardblock" parameterType="java.lang.String">
+	    update cardinfo set cardBlockCode = 'L' where cardNumber = #{cardNumber}
+	</update>
+   
 </mapper>

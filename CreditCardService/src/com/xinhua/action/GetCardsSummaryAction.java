@@ -58,38 +58,19 @@ public class GetCardsSummaryAction extends ActionSupport{
 					cardList = cardInfoDao.getCardListByAccountNumber(String.valueOf(accountNumber));
 					ProfileUtil.getProfile().setCardList(cardList);
 				}
+				cardList = GetCardInfo.getCreditCardAdditionalData(cardList);
 				
 				List<Map<String,String>> cardDetailsList = new ArrayList<Map<String,String>>();
 				for(int index=0;index<cardList.size();index++){
 					CardInfo card = cardList.get(index);
 					Map<String,String> cardMap = new HashMap<String,String>();
-					int productType = Integer.valueOf(card.getProductType());
-					String cardName = "Credit　Card";
-					if(Const.IIN.MASTERCARD.getProductType() == productType){
-						cardName = "Master Card";
-					}else if(Const.IIN.VISA.getProductType() == productType){
-						cardName = "Visa";
-					}else if(Const.IIN.UNIONPAY.getProductType() == productType){
-						cardName = "Union Pay";
-					}
 					
-					String logo = card.getCardLogo();
-					if(Const.CARDLOGO_NORMAL == logo){
-						cardName += "";
-					}else if(Const.CARDLOGO_SILVER == logo){
-						cardName += "Silver";
-					}else if(Const.CARDLOGO_GOLD == logo){
-						cardName += "Gold";
-					}
-					
-					cardMap.put("cardName", cardName);
+					cardMap.put("cardName", card.getCardName());
 					cardMap.put("cardNumber", card.getCardNumber());
 					cardMap.put("currentAmount", card.getCurrentAmount().toPlainString());
 					cardMap.put("cardIndex", ""+index);
 					cardMap.put("cardActive", card.getCardActiveCode());
-					
-					card.setCardName(cardName);
-					card.setCardIndex(index);
+					cardMap.put("cardBlock", card.getCardBlockCode());
 					
 					cardDetailsList.add(cardMap);
 				}

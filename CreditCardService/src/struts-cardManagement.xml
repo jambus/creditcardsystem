@@ -39,6 +39,19 @@
 		<action name="toActiveCardConfirm" class="com.xinhua.action.ActiveCardConfirmAction">
 			<result name="success" type="tiles">creditcard.activeCardConfirm</result>
 		</action>
+		
+		<action name="toCardBlock" class="com.xinhua.action.CardBlockAction">
+			<result name="success" type="tiles">creditcard.CardBlockInput</result>
+		</action>
+		
+		<action name="toCardBlockRecap" class="com.xinhua.action.CardBlockRecapAction">
+			<result name="success" type="tiles">creditcard.CardBlockRecap</result>
+			<result name="input" type="tiles">creditcard.CardBlockInput</result>
+		</action>
+		
+		<action name="toCardBlockConfirm" class="com.xinhua.action.CardBlockConfirmAction">
+			<result name="success" type="tiles">creditcard.CardBlockConfirm</result>
+		</action>
 	</package>
 	
 </struts>

@@ -1,19 +1,23 @@
 package com.xinhua.action;
 
 import java.util.List;
+import java.util.Map;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.xinhua.constant.Const;
-import com.xinhua.dao.CardInfoDao;
 import com.xinhua.dao.impl.CardInfoDaoImpl;
 import com.xinhua.pojo.CardInfo;
-import com.xinhua.util.GetCardInfo;
+import com.xinhua.util.PageComponentBuildUtil;
 import com.xinhua.util.ProfileUtil;
 
-public class ActiveCardConfirmAction extends ActionSupport {
+public class CardBlockAction extends ActionSupport{
 
 	private int cardIndex = 0;
 	private List<CardInfo> cardlist = null;
+	
+	public Map<String,String> getCardNumberDropDownMap(){
+		return PageComponentBuildUtil.buildCardSelectDropdown();
+	}
 	
 	public int getCardIndex() {
 		return cardIndex;
@@ -24,7 +28,6 @@ public class ActiveCardConfirmAction extends ActionSupport {
 	}
 	
 	public CardInfo getCardDetails(){
-
 		cardlist = ProfileUtil.getProfile().getCardList();
 		
 		if(cardlist!=null && cardlist.size() > cardIndex){
@@ -33,33 +36,19 @@ public class ActiveCardConfirmAction extends ActionSupport {
 		return null;
 	}
 	
-	public String getCardStatus(){
+	public String getCardBlockCode(){
 		 if(getCardDetails()!=null){
-			 String status =  getCardDetails().getCardActiveCode();
-			 if(Const.CARD_ACTIVE.equals(status)){
-				 return "Active";
+			 String status =  getCardDetails().getCardBlockCode();
+			 if(Const.CARDBLOCKCODE_LOST.equals(status)){
+				 return "Lost/Block";
 			 }else{
-				 return "Not Active";
+				 return "OK";
 			 }
 		 }
 		 return "Unknown status";
 	}
-	
-	private CardInfoDao cardInfoDao = new CardInfoDaoImpl();
-		
 
 	public String execute(){
-		
-		if(ProfileUtil.isCustomerLogin()){
-			cardInfoDao.activeCard(getCardDetails());
-			
-			String accountNumber = ProfileUtil.getProfile().getAccountNumber();
-			List<CardInfo> cardList = cardInfoDao.getCardListByAccountNumber(accountNumber);
-			cardList = GetCardInfo.getCreditCardAdditionalData(cardList);
-			this.cardlist = cardList;
-			ProfileUtil.getProfile().setCardList(cardList);
-		}
-		
 		return SUCCESS;
 	}
 }

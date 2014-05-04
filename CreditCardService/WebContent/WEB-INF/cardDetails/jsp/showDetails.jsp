@@ -19,11 +19,14 @@ function cardChange(){
 			<div>Credit limit: ${cardDetails.creditLimit} Yuan</div>
 			<div>Credit owe: ${cardAmountOwe} Yuan</div>
 			
-			<s:if test='"Y"==cardDetails.cardActiveCode'>
-			<div>Card status: Active</div>
+			<s:if test='"N"==cardDetails.cardActiveCode'>
+				<div class="cardInactive">Card status: Inactive</div>
 			</s:if>
+			<s:elseif test='"Y"==cardDetails.cardActiveCode && "L"==cardDetails.cardBlockCode'>
+				<div class="cardInactive">Card status: Lost/Block</div>
+			</s:elseif>
 			<s:else>
-			<div class="cardInactive">Card status: Inactive</div>
+				<div>Card status: Active</div>
 			</s:else>
 		</div>
 		</s:form>

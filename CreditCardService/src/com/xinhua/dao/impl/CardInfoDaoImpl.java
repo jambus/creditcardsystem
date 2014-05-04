@@ -144,4 +144,22 @@ public class CardInfoDaoImpl implements CardInfoDao {
 		return txnList;
 	}
 
+	@Override
+	public int cardblock(CardInfo cardInfo) {
+		int lines = 0;
+		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        	lines = userMapper.cardblock(cardInfo.getCardNumber());
+            sqlSession.commit();
+        } catch(Exception e){
+        	log.error("cardblock:"+e.getMessage());
+        	sqlSession.rollback();
+        }
+        finally {
+            sqlSession.close();
+        }
+		return lines;
+	}
+
 }
