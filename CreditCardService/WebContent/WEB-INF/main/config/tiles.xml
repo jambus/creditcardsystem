@@ -78,4 +78,17 @@
     <definition name="creditcard.CardBlockConfirm" extends="defaultLayout">
     	<put-attribute name="body" value="/WEB-INF/cardblock/jsp/confirm.jsp" />
     </definition>
+    
+    <definition name="creditcard.PrivateUpdateInput" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/privateUpdate/jsp/input.jsp" />
+    </definition>
+    
+    <definition name="creditcard.PrivateUpdateRecap" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/privateUpdate/jsp/recap.jsp" />
+    </definition>
+    
+    <definition name="creditcard.PrivateUpdateConfirm" extends="defaultLayout">
+    	<put-attribute name="body" value="/WEB-INF/privateUpdate/jsp/confirm.jsp" />
+    </definition>
+    
 </tiles-definitions>

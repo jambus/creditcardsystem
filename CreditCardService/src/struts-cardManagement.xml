@@ -46,10 +46,10 @@
 		
 		<action name="toCardBlockRecap" class="com.xinhua.action.CardBlockRecapAction">
 			<result name="success" type="tiles">creditcard.CardBlockRecap</result>
-			<result name="input" type="tiles">creditcard.CardBlockInput</result>
 		</action>
 		
 		<action name="toCardBlockConfirm" class="com.xinhua.action.CardBlockConfirmAction">
+		    <result name="input" type="tiles">creditcard.CardBlockRecap</result>
 			<result name="success" type="tiles">creditcard.CardBlockConfirm</result>
 		</action>
 	</package>

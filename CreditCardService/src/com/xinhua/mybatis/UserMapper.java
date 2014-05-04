@@ -33,4 +33,8 @@ public interface UserMapper {
 	public int activeCard(String cardNumber);
 	
 	public int cardblock(String cardNumber);
+	
+	public UserInfo getUserInfoByCustomerNumber(long customerNumber);
+	
+	public int modifyUserInfo(UserInfo userInfo);
 }

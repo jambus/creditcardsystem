@@ -94,10 +94,36 @@ public class UserInfoDaoImpl implements UserInfoDao {
 
 	@Override
 	public int modifyUserInfo(UserInfo userInfo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int lines = 0;
+		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        	lines = userMapper.modifyUserInfo(userInfo);
+            
+            sqlSession.commit();
+        } catch(Exception e){
+        	log.error("modifyUserInfo:"+e.getMessage());
+        	lines = -1;
+        	sqlSession.rollback();
+        } 
+        finally {
+            sqlSession.close();
+        }
+        return lines;
 	}
 
-	
-
+	@Override
+	public UserInfo getUserInfoByCustomerNumber(long customerNumber) {
+		UserInfo userInfo = null;
+		SqlSession sqlSession =  MyBatisUtil.getSqlSessionFactory().openSession();
+        try {
+        	UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        	userInfo = userMapper.getUserInfoByCustomerNumber(customerNumber);
+            sqlSession.commit();
+        } finally {
+            sqlSession.close();
+        }
+		
+		return userInfo;
+	}
 }

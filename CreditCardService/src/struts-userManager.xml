@@ -34,6 +34,20 @@
 		<action name="logoff" class="com.xinhua.action.LogOffAction">
 			<result name="logoff" type="tiles">creditcard.logoff</result>
 		</action>
+		
+		<action name="toPrivateUpdate" class="com.xinhua.action.PrivateUpdateAction">
+			<result name="success" type="tiles">creditcard.PrivateUpdateInput</result>
+		</action>
+		
+		<action name="toPrivateUpdateRecap" class="com.xinhua.action.PrivateUpdateRecapAction">
+			<result name="success" type="tiles">creditcard.PrivateUpdateRecap</result>
+			<result name="input" type="tiles">creditcard.PrivateUpdateInput</result>
+		</action>
+		
+		<action name="toPrivateUpdateConfirm" class="com.xinhua.action.PrivateUpdateConfirmAction">
+			<result name="success" type="tiles">creditcard.PrivateUpdateConfirm</result>
+		</action>
+		
 	</package>
 	
 </struts>

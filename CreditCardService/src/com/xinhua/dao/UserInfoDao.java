@@ -13,4 +13,6 @@ public interface UserInfoDao {
 	
 	int modifyUserInfo(UserInfo userInfo);
 	List<UserInfo> getAllUserInfo();
+	
+	UserInfo getUserInfoByCustomerNumber(long customerNumber);
 }

@@ -16,7 +16,7 @@
     	insert into accountInfo (accountNumber,customerNumber) values(#{accountNumber},#{customerNumber})
 	</insert>
 	
-	<select id="getAccountNumberForUser" parameterType="com.xinhua.pojo.UserInfo" resultType="java.lang.String">
+	<select id="getAccountNumberForUsmodifyUserInfoer" parameterType="com.xinhua.pojo.UserInfo" resultType="java.lang.String">
     	select accountNumber from accountInfo where customerNumber =#{customerNumber}
 	</select>
 	
@@ -59,5 +59,13 @@
 	<update id="cardblock" parameterType="java.lang.String">
 	    update cardinfo set cardBlockCode = 'L' where cardNumber = #{cardNumber}
 	</update>
+	
+	<select id="getUserInfoByCustomerNumber" resultType="com.xinhua.pojo.UserInfo" parameterType="java.lang.Long">
+        select * from userinfo where customerNumber =#{customerNumber}
+    </select>
    
+	<update id="modifyUserInfo" parameterType="com.xinhua.pojo.UserInfo">
+	    update userinfo set address=#{address}, tel=#{tel}, mail=#{mail} where customerNumber =#{customerNumber}
+	</update>
+	
 </mapper>
